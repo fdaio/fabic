@@ -48,3 +48,7 @@
 - 不记录任何个人、客户、内部项目、凭证或真实业务数据。
 - 规则改动优先改 `AGENTS.md`；角色操作细节放 `docs/agent/`。
 - 文档声称的行为必须能在规则或项目现场命令中找到依据。
+
+## License
+
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full text.
