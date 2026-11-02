@@ -1,0 +1,27 @@
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Local environment and secrets
+.env
+.env.*
+*.local
+*.pem
+*.key
+id_rsa*
+
+# Local data and runtime output
+data/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.log
+.wf/
+
+# Spreadsheets and exported data
+*.xls
+*.xlsx
+*.csv
