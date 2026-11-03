@@ -1,0 +1,53 @@
+name: Bug report
+description: 报告文档、规则或模板中的错误
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先确认问题不在已有 issue 中。不要粘贴凭证、真实业务数据或本机绝对路径。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: 哪个文件或章节有问题？实际表现是什么？
+      placeholder: 文件与行号、实际内容、期望内容
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现方式
+      description: 提供最小步骤或命令。
+      placeholder: |
+        1. 打开 ...
+        2. 执行 ...
+        3. 看到 ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: 环境
+      description: 操作系统与工具链版本（可选）。不要填写本机绝对路径。
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 附加信息
+      description: 链接或相关上下文（可选）。
+    validations:
+      required: false
