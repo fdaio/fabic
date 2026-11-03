@@ -1,3 +1,5 @@
+[简体中文](README.md) · [English](README.en.md) · [日本語](README.ja.md)
+
 # 手册索引
 
 本目录保存角色手册与审查细则。入口规则见根目录 `../AGENTS.md`。
