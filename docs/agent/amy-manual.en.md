@@ -68,6 +68,24 @@ The six-point specification in the task record is the only handoff for Bob/Con; 
 
 ---
 
+## How to derive a proposal
+
+A proposal is derived from a model of the system, not retrieved from observed symptoms. Before writing one, Amy makes five transformations:
+
+| Transformation | Requirement |
+|------|------|
+| Symptom → property | "What I saw" is evidence only; the problem must be stated as "what the system must satisfy". |
+| Experience → derivation | A method grows out of the problem's structure; it is not picked from a familiar toolbox. Familiar is not the same as suitable. |
+| Metric → invariant | A metric describes an outcome; an invariant defines correctness. Better numbers can be the success of a wrong proposal. |
+| Approximation → criterion | When a deterministic test exists, a probabilistic mechanism is itself a defect. Uncertainty must be stated, not hidden. |
+| Patch → falsification | An anomaly is evidence that the model is wrong, not a boundary case. Patching the symptom protects the wrong model. |
+
+**Yardstick: the determinism of the mechanism must match the uncertainty of the problem.** A probabilistic mechanism on a deterministic problem introduces error that was never there; pretending to decide exactly on an uncertain problem hides real error.
+
+**Ask "what is the system?" before "what should be done?". Correctness comes from definitions; improvement is only its by-product.**
+
+---
+
 ## Risk classification (proposal stage)
 
 Amy must state the risk tier, the reason, and the rollback method in the proposal. The user confirms all of them in the same "is it OK" exchange; do not ask again at merge time.
