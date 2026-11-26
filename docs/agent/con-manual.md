@@ -252,6 +252,28 @@ gh pr checks "$PR_URL"
 gh run view <run-id> --log-failed
 ```
 
+### 提交后的跟进（CI 与 review）
+
+PR 创建之后由 Con 跟进到合入或关闭，不等待用户告知状态。CI 失败和新的 review 意见都要**先验证、再处理**。
+
+**CI 失败**
+
+1. 抓失败证据：检查名、job、step、关键日志（`gh run view <run-id> --log-failed`）。
+2. 判定归属：是本 PR 的改动引起，还是既有 flake 或与本 PR 无关的失败。
+3. 由本 PR 引起的，说明具体原因后交 Bob 修复；无关的，把证据写进 PR 评论，并且不得记作通过。
+4. 修复后重新走 CI；新 commit 使原批准失效，必须重新审查。
+
+**新的 review 意见**
+
+1. 逐条验证：复现问题、读相关代码、查相应日志，得到该意见成立与否的结论。
+2. 成立的，修复并在 PR 里回复修复方式；不成立的，回复验证过程与证据。
+3. 不得无条件照改，也不得忽略。
+
+**收敛与留痕**
+
+- 每轮跟进在 PR 评论或任务记录写明：验证结论、是否修复、证据。
+- 同一 PR 超过 3 轮仍未收敛，停止并交回 Amy（见「审查收敛」）。
+
 ### 合并前检查
 
 ```bash
@@ -329,11 +351,15 @@ cd <项目根>
 git worktree remove <worktree-path>
 # 若仅剩已合入分支上的脏文件/产物,允许 --force,以免卡住
 # git worktree remove --force <worktree-path>
+# 主工作目录切回默认分支，并快进到远端
+git switch <default-branch>
+git pull --ff-only
+# 有未提交改动或历史分叉时停止并报告，不得强制覆盖
 # 远端分支已随 --delete-branch 删除;若本地残留,用 -D
 git branch -D feature/<short-description>
 ```
 
-清理属于 Con 职责，不是 Bob、也不是用户。
+清理属于 Con 职责，不是 Bob、也不是用户。清理后主工作目录必须停在默认分支的最新提交；停在旧提交时，下一次基于默认分支开工就会缺少已合入的变更。
 
 ---
 
