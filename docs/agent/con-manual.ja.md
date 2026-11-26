@@ -353,11 +353,15 @@ cd <project-root>
 git worktree remove <worktree-path>
 # マージ済みブランチ上のダーティなファイルや生成物だけが残る場合、ブロックを避けるため --force を許可する
 # git worktree remove --force <worktree-path>
+# メインの作業ディレクトリをデフォルトブランチに戻し、リモートまで早送りする
+git switch <default-branch>
+git pull --ff-only
+# 未コミットの変更や履歴の分岐がある場合は停止して報告する。強制的に上書きしない
 # リモートブランチは --delete-branch で削除済み。ローカルに残る場合は -D を使う
 git branch -D feature/<short-description>
 ```
 
-削除は Con の職務であり、Bob でもユーザーでもありません。
+削除は Con の職務であり、Bob でもユーザーでもありません。削除後、メインの作業ディレクトリはデフォルトブランチの最新の commit に置かなければなりません。古い commit に残ると、デフォルトブランチから始める次のタスクがマージ済みの変更を欠きます。
 
 ---
 

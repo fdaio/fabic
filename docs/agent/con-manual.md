@@ -351,11 +351,15 @@ cd <项目根>
 git worktree remove <worktree-path>
 # 若仅剩已合入分支上的脏文件/产物,允许 --force,以免卡住
 # git worktree remove --force <worktree-path>
+# 主工作目录切回默认分支，并快进到远端
+git switch <default-branch>
+git pull --ff-only
+# 有未提交改动或历史分叉时停止并报告，不得强制覆盖
 # 远端分支已随 --delete-branch 删除;若本地残留,用 -D
 git branch -D feature/<short-description>
 ```
 
-清理属于 Con 职责，不是 Bob、也不是用户。
+清理属于 Con 职责，不是 Bob、也不是用户。清理后主工作目录必须停在默认分支的最新提交；停在旧提交时，下一次基于默认分支开工就会缺少已合入的变更。
 
 ---
 

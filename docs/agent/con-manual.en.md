@@ -353,11 +353,15 @@ cd <project-root>
 git worktree remove <worktree-path>
 # If only dirty files/artifacts on the merged branch remain, --force is allowed to avoid blocking
 # git worktree remove --force <worktree-path>
+# Put the main working copy back on the default branch and fast-forward it
+git switch <default-branch>
+git pull --ff-only
+# Stop and report when there are uncommitted changes or the history diverged; never force an overwrite
 # The remote branch was deleted by --delete-branch; if a local branch remains, use -D
 git branch -D feature/<short-description>
 ```
 
-Cleanup belongs to Con, not Bob and not the user.
+Cleanup belongs to Con, not Bob and not the user. After cleanup, the main working copy must sit on the latest commit of the default branch; a copy left on an old commit starts the next task without the merged changes.
 
 ---
 
