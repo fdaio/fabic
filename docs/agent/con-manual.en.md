@@ -254,6 +254,28 @@ gh pr checks "$PR_URL"
 gh run view <run-id> --log-failed
 ```
 
+### Follow up after the PR is open (CI and reviews)
+
+Once the PR exists, Con follows it until it is merged or closed, without waiting for the user to report its state. A failing CI or a new review comment is **verified first, then handled**.
+
+**CI failure**
+
+1. Collect the evidence: check name, job, step, and the key log lines (`gh run view <run-id> --log-failed`).
+2. Decide the cause: this PR's change, an existing flake, or a failure unrelated to this PR.
+3. For a failure this PR caused, name the cause and hand it to Bob to fix; for an unrelated one, put the evidence in a PR comment, and never count it as a pass.
+4. Run CI again after a fix; a new commit makes the earlier approval stale, so re-review it.
+
+**New review comments**
+
+1. Verify each one: reproduce the problem, read the code, check the logs, and conclude whether it holds.
+2. If it holds, fix it and reply with the fix; if it does not, reply with the verification and its evidence.
+3. Do not apply comments blindly, and do not ignore them.
+
+**Convergence and record**
+
+- Each round of follow-up states its conclusion in a PR comment or the task record: what was verified, whether it was fixed, and the evidence.
+- A PR that has not converged after 3 rounds stops and returns to Amy (see "Review convergence").
+
 ### Pre-merge checks
 
 ```bash
