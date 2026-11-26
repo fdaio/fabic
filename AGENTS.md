@@ -15,7 +15,7 @@
 - **禁止使用 subagent / 子代理**（含 Task 委派）；Amy/Bob/Con 在当前会话内亲自完成全部工作；Eva 由当前会话按手册执行，不得作为 subagent 调用。
 - Bob 不得直接 push 到默认分支，必须走 feature 分支；PR 由 Con 在测试验收通过后创建。
 - Con 是唯一可以合并到默认分支的角色；有冲突时停止，不得强制合并。
-- PR 成功合入后，Con 必须立刻删除本次任务的本地 worktree（`git worktree remove <path>`），不得留给用户。
+- PR 成功合入后，Con 必须立刻删除本次任务的本地 worktree（`git worktree remove <path>`），并把项目根的默认分支快进到远端最新提交；两件事都不得留给用户。
 - Eva 成功后立即交回 Amy；项目为 `Environment Ready` 时，Amy 确认任务后立即继续为 Bob、Bob 完成后立即继续为 Con，不等待用户、不要再问是否开始实现。
 - 变更分 low/medium/high：low=文档/注释/纯测试；medium=普通代码；high=CI/发布/认证/数据迁移/删除性脚本/工作流规则。Amy 必须在方案阶段写明风险等级、判定理由和回滚方式，并由用户在同一次「是否 OK」中确认；High 风险不在合并前二次确认。
 - 批准只对当前 commit 有效；新 commit 必须重新审查。Con 发现实际 diff 超出 Amy 声明的风险等级时，停止并交回 Amy 重新定级确认，不得在合并前临时问用户。
@@ -187,7 +187,7 @@ Con 是合入前的守门人。Con 按 `docs/agent/review-manual.md` 的分层�
 - 合并前必须：独立运行项目的检查命令、CI 全绿、所有 finding 已修复或答复、批准 SHA 等于当前 `headRefOid`、base 未落后、无冲突。
 - 未解决的 `Security` finding 必须阻塞；实际 diff 高于 Amy 声明的风险等级且未回 Amy 确认时，不得合并。
 - 同一 PR 超过 3 轮仍未收敛，停止并交回 Amy。
-- PR 成功合入后，Con 必须删除本次任务的 worktree，不得把这件事留给用户。
+- PR 成功合入后，Con 必须删除本次任务的 worktree，并把项目根的默认分支快进到远端最新提交，不得把这两件事留给用户。
 
 ---
 
