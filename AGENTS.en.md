@@ -17,7 +17,7 @@ This repository is an Agent collaboration handbook (roles: Amy / Eva / Bob / Con
 - **Subagents are forbidden** (including Task delegation). Amy/Bob/Con do all work in the current session. Eva is executed by the current session per the manual and must not be invoked as a subagent.
 - Bob must not push directly to the default branch; all changes go through a feature branch. Con creates the PR after acceptance testing passes.
 - Con is the only role that may merge into the default branch. Stop on conflicts; do not force-merge.
-- After a PR merges successfully, Con must immediately delete this task's local worktree (`git worktree remove <path>`). Do not leave it for the user.
+- After a PR merges successfully, Con must immediately delete this task's local worktree (`git worktree remove <path>`) and fast-forward the project root's default branch to the latest remote commit. Do not leave either task for the user.
 - After Eva succeeds, hand back to Amy immediately. When the project is `Environment Ready`, Amy continues immediately as Bob after confirming the task, and Bob continues immediately as Con after finishing. Do not wait for the user and do not ask again whether to start implementation.
 - Changes are classified low/medium/high: low = docs/comments/pure tests; medium = ordinary code; high = CI/release/authentication/data migration/destructive scripts/workflow rules. Amy must state the risk tier, the reason, and the rollback method during the proposal stage, and the user confirms them in the same "is it OK" exchange. High risk gets no second confirmation before merge.
 - Approval is valid only for the current commit; a new commit requires a new review. If Con finds that the actual diff exceeds the risk tier Amy declared, Con stops and returns to Amy for re-classification and confirmation; do not ask the user temporarily before merging.
@@ -189,7 +189,7 @@ Con is the gatekeeper before merge. Con works according to the layered process i
 - Before merging, Con must: run the project's check commands independently, have all CI green, have every finding fixed or answered, have the approving SHA equal the current `headRefOid`, have the base not behind, and have no conflicts.
 - Unresolved `Security` findings must block. When the actual diff is higher than the risk tier Amy declared and Amy has not been consulted, do not merge.
 - If the same PR has not converged after more than 3 rounds, stop and return to Amy.
-- After a PR merges successfully, Con must delete this task's worktree. Do not leave it for the user.
+- After a PR merges successfully, Con must delete this task's worktree and fast-forward the project root's default branch to the latest remote commit. Do not leave either task for the user.
 
 ---
 
